@@ -1,0 +1,98 @@
+.dish-card {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid #d7d7d7;
+}
+
+.dish-left-section {
+  width: 60%;
+}
+
+.dish-name {
+  font-size: 18px;
+  margin: 8px 0;
+}
+
+.dish-price {
+  font-weight: 600;
+  margin: 6px 0;
+}
+
+.dish-description {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.counter-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: green;
+  width: fit-content;
+  padding: 8px 16px;
+  border-radius: 20px;
+  color: white;
+}
+
+.counter-container button {
+  border: none;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+}
+
+.not-available {
+  color: red;
+}
+
+.customization-text {
+  color: #2563eb;
+  font-size: 14px;
+}
+
+.calories-text {
+  color: orange;
+  font-weight: bold;
+}
+
+.dish-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.veg-indicator,
+.nonveg-indicator {
+  width: 18px;
+  height: 18px;
+  border: 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.veg-indicator {
+  border-color: green;
+}
+
+.nonveg-indicator {
+  border-color: brown;
+}
+
+.veg-circle,
+.nonveg-circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.veg-circle {
+  background-color: green;
+}
+
+.nonveg-circle {
+  background-color: brown;
+}

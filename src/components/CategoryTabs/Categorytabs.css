@@ -1,0 +1,23 @@
+.active-tab {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: red;
+  border-bottom: 2px solid red;
+  font-size: 24px;
+  padding: 10px;
+}
+.tab-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 24px;
+}
+.category-tabs-container {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  gap: 20px;
+}
