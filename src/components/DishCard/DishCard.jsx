@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import './DishCard.css'
 
-const DishCard = ({dish, setCartCount}) => {
+const DishCard = ({dish, setcartCount}) => {
   const [count, setCount] = useState(0)
 
   const isVeg = dish.dish_Type === 1
@@ -9,14 +9,14 @@ const DishCard = ({dish, setCartCount}) => {
   const onIncrement = () => {
     setCount(prevCount => prevCount + 1)
 
-    setCartCount(prevCount => prevCount + 1)
+    setcartCount(prevCount => prevCount + 1)
   }
 
   const onDecrement = () => {
     if (count > 0) {
       setCount(prevCount => prevCount - 1)
 
-      setCartCount(prevCount => prevCount - 1)
+      setcartCount(prevCount => prevCount - 1)
     }
   }
 

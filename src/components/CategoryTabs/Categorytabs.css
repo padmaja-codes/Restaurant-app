@@ -20,4 +20,8 @@
   white-space: nowrap;
   scrollbar-width: none;
   gap: 20px;
+  -webkit-overflow-scrolling: touch;
+}
+.category-tabs-container::-webkit-scrollbar {
+  display: none;
 }
