@@ -16,14 +16,51 @@ Developing a restaurant page, ensuring it is user-friendly and visually appealin
     </div>
 </a>
 
-#### API:
+## API
 
-<a href="https://apis2.ccbp.in/restaurant-app/restaurant-menu-list-details" target=_blank_ >https://apis2.ccbp.in/restaurant-app/restaurant-menu-list-details</a>
+https://apis2.ccbp.in/restaurant-app/restaurant-menu-list-details
 
-####App contains features:
+## Features
 
-- The API returns the dish categories and the dishes in that category.
-- The dish categories would be slidable.
-- If a dish has addons(`addoncat`), then it will display the text **“Customizations available”**.
-- Clicking on the `+` and `-` buttons would update the count accordingly and also on the cart icon on the top bar.
-- The tabs must change their length as per API.
+### Menu & Dishes
+
+* Fetches restaurant menu data from the provided API.
+* Displays dish categories dynamically based on API response.
+* Category tabs are horizontally scrollable.
+* Displays all dishes under their respective categories.
+* Shows "Customizations Available" when a dish contains add-ons.
+
+### Authentication
+
+* Login functionality with username and password validation.
+* Authentication maintained using Cookies (js-cookie).
+* Protected routes for Home and Cart pages.
+* Unauthenticated users are redirected to the Login page.
+* Authenticated users can access Home and Cart routes directly.
+* Logout functionality with session removal.
+
+### Cart Management
+
+* Add dishes to the cart using the "ADD TO CART" button.
+* Cart count updates automatically when new dishes are added.
+* Adding the same dish multiple times increases its quantity instead of creating duplicate entries.
+* Real-time cart synchronization across Home and Cart pages using React Context API.
+* Increase or decrease dish quantity directly from the cart.
+* Automatically removes a dish when its quantity reaches zero.
+* Remove individual cart items.
+* Remove all items from the cart with a single click.
+* Displays an Empty Cart state when no items are available.
+
+### State Management
+
+* Implemented React Context API for global cart state management.
+* Maintains synchronization between Home and Cart routes.
+* Eliminates prop drilling by providing a centralized state management solution.
+
+### User Experience
+
+* Responsive and clean user interface.
+* Dynamic cart item count displayed in the header.
+* Seamless navigation between Login, Home, and Cart pages.
+* Real-time price updates based on item quantity.
+
