@@ -96,3 +96,11 @@
 .nonveg-circle {
   background-color: brown;
 }
+
+.add-to-cart-btn {
+  background-color: transparent;
+  border-radius: 8px;
+  margin-top: 5px;
+  padding: 5px 5px;
+  font-size: 12px;
+}

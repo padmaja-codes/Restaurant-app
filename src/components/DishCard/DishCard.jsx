@@ -1,23 +1,33 @@
-import {useState} from 'react'
+import {useState, useContext} from 'react'
+
+import CartContext from '../../context/CartContext'
+
 import './DishCard.css'
 
-const DishCard = ({dish, setcartCount}) => {
+const DishCard = ({dish}) => {
   const [count, setCount] = useState(0)
+
+  const {addCartItem} = useContext(CartContext)
 
   const isVeg = dish.dish_Type === 1
 
   const onIncrement = () => {
     setCount(prevCount => prevCount + 1)
-
-    setcartCount(prevCount => prevCount + 1)
   }
 
   const onDecrement = () => {
     if (count > 0) {
       setCount(prevCount => prevCount - 1)
-
-      setcartCount(prevCount => prevCount - 1)
     }
+  }
+
+  const onAddToCart = () => {
+    const cartItemDetails = {
+      ...dish,
+      quantity: count,
+    }
+
+    addCartItem(cartItemDetails)
   }
 
   return (
@@ -36,17 +46,29 @@ const DishCard = ({dish, setcartCount}) => {
         <p className="dish-description">{dish.dish_description}</p>
 
         {dish.dish_Availability ? (
-          <div className="counter-container">
-            <button type="button" onClick={onDecrement}>
-              -
-            </button>
+          <>
+            <div className="counter-container">
+              <button type="button" onClick={onDecrement}>
+                -
+              </button>
 
-            <span>{count}</span>
+              <span>{count}</span>
 
-            <button type="button" onClick={onIncrement}>
-              +
-            </button>
-          </div>
+              <button type="button" onClick={onIncrement}>
+                +
+              </button>
+            </div>
+
+            {count > 0 && (
+              <button
+                type="button"
+                className="add-to-cart-btn"
+                onClick={onAddToCart}
+              >
+                ADD TO CART
+              </button>
+            )}
+          </>
         ) : (
           <p className="not-available">Not Available</p>
         )}

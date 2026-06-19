@@ -1,10 +1,10 @@
 import DishCard from '../DishCard/DishCard'
 import './DishList.css'
 
-const DishList = ({dishes, setcartCount}) => (
+const DishList = ({dishes}) => (
   <ul className="dish-list-container">
     {dishes.map(dish => (
-      <DishCard key={dish.dish_id} dish={dish} setcartCount={setcartCount} />
+      <DishCard key={dish.dish_id} dish={dish} />
     ))}
   </ul>
 )

@@ -1,67 +1,83 @@
-import {useState, useEffect} from 'react'
-import Header from './components/Headercom/Header'
-import CategoryTabs from './components/CategoryTabs/CategoryTabs'
-import DishList from './components/DishList/DishList'
+import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import {useState} from 'react'
+
+import Home from './pages/Home'
+import Login from './pages/Login'
+import Cart from './pages/Cart'
+import CartContext from './context/CartContext'
+import ProtectedRoute from './components/ProtectedRoute'
 
 import './App.css'
 
 const App = () => {
-  const [restaurantData, setRestaurantData] = useState(null)
-  const [activeCategory, setActiveCategory] = useState('')
-  const [loading, setLoading] = useState(true)
-  const [cartCount, setcartCount] = useState(0)
+  const [cartList, setcartList] = useState([])
 
-  const getRestaurantData = async () => {
-    setLoading(true)
-    try {
-      const response = await fetch(
-        'https://apis2.ccbp.in/restaurant-app/restaurant-menu-list-details',
+  const addCartItem = item => {
+    const existingItem = cartList.find(
+      eachItem => eachItem.dish_id === item.dish_id,
+    )
+
+    if (existingItem) {
+      setcartList(
+        cartList.map(eachItem =>
+          eachItem.dish_id === item.dish_id
+            ? {
+                ...eachItem,
+                quantity: eachItem.quantity + item.quantity,
+              }
+            : eachItem,
+        ),
       )
-      const data = await response.json()
-      setRestaurantData(data[0])
-    } catch {
-      console.log('error')
-    } finally {
-      setLoading(false)
+    } else {
+      setcartList([...cartList, item])
     }
   }
-  useEffect(() => {
-    getRestaurantData()
-  }, [])
 
-  useEffect(() => {
-    if (restaurantData) {
-      setActiveCategory(restaurantData.table_menu_list[0].menu_category_id)
-    }
-  }, [restaurantData])
-
-  if (loading) {
-    return <p>Loading.....</p>
+  const removeCartItem = id => {
+    setcartList(cartList.filter(item => item.dish_id !== id))
   }
 
-  if (!restaurantData) <h1>No Data Available</h1>
+  const incrementCartItemQuantity = id => {
+    setcartList(
+      cartList.map(item =>
+        item.dish_id === id ? {...item, quantity: item.quantity + 1} : item,
+      ),
+    )
+  }
+
+  const decrementCartItemQuantity = id => {
+    setcartList(
+      cartList
+        .map(item =>
+          item.dish_id === id ? {...item, quantity: item.quantity - 1} : item,
+        )
+        .filter(item => item.quantity > 0),
+    )
+  }
+
+  const removeAllCartItems = () => {
+    setcartList([])
+  }
 
   return (
-    <div className="app-container">
-      <Header
-        restaurantName={restaurantData.restaurant_name}
-        cartCount={cartCount}
-      />
-      <CategoryTabs
-        categories={restaurantData.table_menu_list}
-        activeCategory={activeCategory}
-        setActiveCategory={setActiveCategory}
-      />
-      <DishList
-        dishes={
-          restaurantData.table_menu_list.find(
-            cat => cat.menu_category_id === activeCategory,
-          )?.category_dishes || []
-        }
-        setcartCount={setcartCount}
-      />
-    </div>
+    <CartContext.Provider
+      value={{
+        cartList,
+        addCartItem,
+        removeCartItem,
+        incrementCartItemQuantity,
+        decrementCartItemQuantity,
+        removeAllCartItems,
+      }}
+    >
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/login" component={Login} />
+          <ProtectedRoute exact path="/" component={Home} />
+          <ProtectedRoute exact path="/cart" component={Cart} />
+        </Switch>
+      </BrowserRouter>
+    </CartContext.Provider>
   )
 }
-
 export default App
